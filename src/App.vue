@@ -2,21 +2,19 @@
   section.section
     .container.box
       .columns.is-desktop
-        .column.is-two-thirds
-          player
-        .column
-          chat
+        player
+        sidebar
 </template>
 
 <script>
-import Chat from './components/Chat'
+import Sidebar from './components/Sidebar'
 import Player from './components/Player'
 import Trianglify from 'trianglify'
 
 export default {
   name: 'app',
   components: {
-    Chat,
+    Sidebar,
     Player
   },
   created: () => {
@@ -36,5 +34,10 @@ export default {
   @import "./common/styles"
   html
     background: transparent
-
+  body
+    color: #333
+  ::-webkit-scrollbar
+    width: 5px
+  ::-webkit-scrollbar-thumb
+    border-radius: 5px
 </style>
