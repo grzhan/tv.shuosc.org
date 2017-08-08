@@ -15,7 +15,7 @@
       .control.is-expanded
         input.input(type="text", v-model="message")
       .control
-        a.button.is-info(@click="send") 发送
+        a.button.is-success(@click="send") 发送
 </template>
 
 <script>
@@ -54,4 +54,5 @@
     border-radius: 5px
     margin-bottom: 10px
     overflow-y: scroll
+    height: 350px
 </style>
