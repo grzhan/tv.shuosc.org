@@ -28,6 +28,12 @@ export default class AppSocket {
   }
 
   send (data) {
+    if (this.ws.readyState > 1) {
+      this.ws = new WebSocket(this.url)
+      this.retry = 0
+      this.resetTime = new Date()
+      this.create()
+    }
     this.ws.send(JSON.stringify(data))
   }
 
