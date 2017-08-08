@@ -9,18 +9,38 @@
           tr
             th 弹幕内容
         tbody
-          tr
-            td 测试
+          tr(v-for="text in danmaku")
+            td {{text}}
     .send-message.field.has-addons
       .control.is-expanded.is-loading
-        input.input(type="text")
+        input.input(type="text", v-model="message")
       .control
-        a.button.is-info 发送
+        a.button.is-info(@click="send") 发送
 </template>
 
 <script>
+  import EventBus from '../common/event-bus'
+
   export default {
-    name: 'sidebar'
+    name: 'sidebar',
+    mounted: function () {
+      EventBus.$on('received', (data) => {
+        console.log(`data received ${data.content}`)
+        this.danmaku.push(data.content)
+      })
+    },
+    data: function () {
+      return {
+        'danmaku': [],
+        'message': ''
+      }
+    },
+    methods: {
+      send: function () {
+        console.log(this.message)
+        EventBus.$emit('send', this.message)
+      }
+    }
   }
 </script>
 

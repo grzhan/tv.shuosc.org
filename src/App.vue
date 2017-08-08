@@ -10,6 +10,8 @@
 import Sidebar from './components/Sidebar'
 import Player from './components/Player'
 import Trianglify from 'trianglify'
+import AppSocket from './common/app-socket'
+import EventBus from './common/event-bus'
 
 export default {
   name: 'app',
@@ -17,7 +19,7 @@ export default {
     Sidebar,
     Player
   },
-  created: () => {
+  created: function () {
     const background = Trianglify({
       y_colors: ['#2b7c6b', '#56c6af', '#44967f', '#22bc9e'],
       x_colors: ['#34485e', '#435c70'],
@@ -26,6 +28,16 @@ export default {
       height: window.screen.height
     })
     document.body.style['background'] = 'url(' + background.png() + ')'
+    const socket = new AppSocket('ws://localhost:8000/danmaku', (event) => {
+      const data = JSON.parse(event.data)
+      console.log('Socket event:', event.data)
+      if (data.type === 'danmaku') {
+        EventBus.$emit('received', data)
+      }
+    })
+    EventBus.$on('send', (text) => {
+      socket.send({type: 'danmaku', content: text})
+    })
   }
 }
 </script>
