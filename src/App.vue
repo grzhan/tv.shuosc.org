@@ -28,7 +28,7 @@ export default {
       height: window.screen.height
     })
     document.body.style['background'] = 'url(' + background.png() + ')'
-    const socket = new AppSocket('ws://localhost:8000/danmaku', (event) => {
+    const socket = new AppSocket('ws://danmaku.shuosc.org:5002/danmaku', (event) => {
       const data = JSON.parse(event.data)
       console.log('Socket event:', event.data)
       if (data.type === 'danmaku') {

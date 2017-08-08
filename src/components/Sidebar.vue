@@ -12,7 +12,7 @@
           tr(v-for="text in danmaku")
             td {{text}}
     .send-message.field.has-addons
-      .control.is-expanded.is-loading
+      .control.is-expanded
         input.input(type="text", v-model="message")
       .control
         a.button.is-info(@click="send") 发送
@@ -20,12 +20,10 @@
 
 <script>
   import EventBus from '../common/event-bus'
-
   export default {
     name: 'sidebar',
     mounted: function () {
       EventBus.$on('received', (data) => {
-        console.log(`data received ${data.content}`)
         this.danmaku.push(data.content)
       })
     },
@@ -37,8 +35,8 @@
     },
     methods: {
       send: function () {
-        console.log(this.message)
         EventBus.$emit('send', this.message)
+        this.message = ''
       }
     }
   }

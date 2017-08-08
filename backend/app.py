@@ -21,10 +21,8 @@ async def danmaku(request, ws):
         connections.add(ws)
         message = await ws.recv()
         data = json.loads(message)
-        print(data)
         for connection in connections.copy():
             try:
-                print('Send message: ', message)
                 await connection.send(message)
             except ConnectionClosed:
                 print('Connection removed')
@@ -32,4 +30,4 @@ async def danmaku(request, ws):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=5002)

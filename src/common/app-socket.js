@@ -6,6 +6,8 @@ export default class AppSocket {
     this.ws = new WebSocket(url)
     this.url = url
     this.func = func
+    this.resetTime = new Date()
+    this.retry = 0
     this.create()
   }
 
@@ -30,7 +32,17 @@ export default class AppSocket {
   }
 
   reconnect () {
-    this.ws = new WebSocket(this.url)
-    this.create()
+    const now = new Date()
+    if (now - this.resetTime > 10000) {
+      this.resetTime = now
+      this.retry = 0
+      this.ws = new WebSocket(this.url)
+      this.create()
+    } else {
+      this.retry += 1
+      if (this.retry < 5) {
+        this.create()
+      }
+    }
   }
 }
