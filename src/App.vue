@@ -48,8 +48,4 @@ export default {
     background: transparent
   body
     color: #333
-  ::-webkit-scrollbar
-    width: 5px
-  ::-webkit-scrollbar-thumb
-    border-radius: 5px
 </style>

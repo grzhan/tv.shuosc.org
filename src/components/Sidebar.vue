@@ -15,7 +15,7 @@
       .control.is-expanded
         input.input(type="text", v-model="message")
       .control
-        a.button.is-success(@click="send") 发送
+        a.button.is-primary(@click="send") 发送
 </template>
 
 <script>
@@ -55,4 +55,6 @@
     margin-bottom: 10px
     overflow-y: scroll
     height: 350px
+  .chat-list::-webkit-scrollbar
+    width: 3px
 </style>
