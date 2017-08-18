@@ -2,6 +2,8 @@
 
 > SHUOSC's live streaming service
 
+![tv.shuosc.org screenshot](https://ws1.sinaimg.cn/large/006tKfTcly1fiomgwtpmbj312k0k00vv.jpg)
+
 ## Build Setup
 
 ``` bash
